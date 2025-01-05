@@ -1,0 +1,60 @@
+
+<div class="container mt-5">
+
+<div class="row">
+
+    <div class="col-3">
+        <div class="mb-3">
+            <input #productName class="form-control"  placeholder="Enter Product Name">
+        </div>
+        <div class="mb-3">
+            <input #productDescription class="form-control" placeholder="Enter Product Description">
+        </div>
+        <div class="mb-3">
+            <input #productPrice class="form-control"  placeholder="Enter Product Price">
+        </div>
+          <button class="btn btn-primary" (click)="addProduct(productName.value,productDescription.value,+productPrice.value)">Add</button>
+    </div>
+    
+
+
+    <div class="col-9">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Price</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products">
+      <td>{{product.name}}</td>
+      <td>{{product.description}}</td>
+      <td>{{product.price}}</td>
+      <td *ngIf="!product.editing">
+        <button class="btn btn-warning btn-sm me-1" (click)="product.editing=true">Edit</button>
+        <button class="btn btn-danger btn-sm ms-1" (click)="deleteProduct(product.id!)">Delete</button>
+      </td>
+      <td *ngIf="product.editing">
+        <div class="p-3 d-flex" >
+          <input [(ngModel)]="product.name" placeholder="Product name" class="form-control">
+          <input [(ngModel)]="product.description" placeholder="Description Product" class="form-control">
+          <input [(ngModel)]="product.price" placeholder="Price Product" class="form-control">
+       
+        <button class="btn btn-success btn-sm" (click)="updateProduct(product);product.editing=false"
+        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Save</button>
+        <button class="btn btn-info btn-sm" (click)="product.editing=false"
+        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Cancel</button>
+      </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+
+</div>
+
+
+</div>
